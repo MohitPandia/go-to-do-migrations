@@ -29,6 +29,7 @@ func Todo(db *gorm.DB) error {
 		Description: "go bro go",
 		DueDate:     time.Now().AddDate(0, 0, 5), // Due in 5 days
 		Completed:   false,
+		DeletedAt: gorm.DeletedAt{Time: time.Now(), Valid: true}, // Mark as soft-deleted
 	}).Error
 
 	if err != nil {

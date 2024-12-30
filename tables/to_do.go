@@ -3,6 +3,8 @@ package tables
 import (
 	"database/sql"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type Todo struct {
@@ -15,6 +17,7 @@ type Todo struct {
 	Completed   bool           `gorm:"column:completed;not null;default:false"`
 	CreatedAt   time.Time      `gorm:"column:created_at;autoCreateTime"`
 	UpdatedAt   time.Time      `gorm:"column:updated_at;autoUpdateTime"`
+	DeletedAt   gorm.DeletedAt `gorm:"column:deleted_at"` // Adds support for soft deletes
 
 	// Foreign Keys
 	// User     Users     `gorm:"foreignKey:UserID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
