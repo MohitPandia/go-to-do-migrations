@@ -10,6 +10,7 @@ import (
 
 func Todo(db *gorm.DB) error {
 	err := db.Create(&tables.Todo{
+		PID:         sql.NullString{String: "todo-001", Valid: true},
 		UserPID:     sql.NullString{String: "user-001", Valid: true},
 		CategoryPID: sql.NullString{String: "cat-001", Valid: true},
 		Title:       "Complete Project Documentation",
@@ -23,13 +24,25 @@ func Todo(db *gorm.DB) error {
 	}
 
 	err = db.Create(&tables.Todo{
+		PID:         sql.NullString{String: "todo-002", Valid: true},
 		UserPID:     sql.NullString{String: "user-001", Valid: true},
 		CategoryPID: sql.NullString{String: "cat-002", Valid: true},
 		Title:       "Go for Health Checkup",
 		Description: "go bro go",
 		DueDate:     time.Now().AddDate(0, 0, 5), // Due in 5 days
 		Completed:   false,
-		DeletedAt: gorm.DeletedAt{Time: time.Now(), Valid: true}, // Mark as soft-deleted
+		DeletedAt:   gorm.DeletedAt{Time: time.Now(), Valid: true}, // Mark as soft-deleted
+	}).Error
+
+	err = db.Create(&tables.Todo{
+		PID:         sql.NullString{String: "todo-003", Valid: true},
+		UserPID:     sql.NullString{String: "user-002", Valid: true},
+		CategoryPID: sql.NullString{String: "cat-001", Valid: true},
+		Title:       "Go for Health Checkup",
+		Description: "go bro go",
+		DueDate:     time.Now().AddDate(0, 0, 4),
+		Completed:   false,
+		DeletedAt:   gorm.DeletedAt{Time: time.Now(), Valid: true}, // Mark as soft-deleted
 	}).Error
 
 	if err != nil {
