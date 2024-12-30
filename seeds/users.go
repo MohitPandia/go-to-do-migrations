@@ -29,6 +29,7 @@ func Users(db *gorm.DB) error {
 		Password:  "hashed_password_2",
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
+		DeletedAt: gorm.DeletedAt{Time: time.Now(), Valid: true}, // Mark as soft-deleted
 	}).Error
 
 	if err != nil {
